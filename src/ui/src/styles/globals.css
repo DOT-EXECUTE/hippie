@@ -1,0 +1,60 @@
+/* 1) @font-face for variable regular and variable italic
+   Put these files in public/fonts/:
+     - public/fonts/FunnelSans-VF.woff2
+     - public/fonts/FunnelSans-Italic-VF.woff2
+   Using a weight range (100 900) tells the browser the font supports that range.
+*/
+@font-face {
+  font-family: 'Funnel Sans Variable';
+  src: url('/fonts/FunnelSans-VariableFont_wght.ttf') format('ttf');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Funnel Sans Variable';
+  src: url('/fonts/FunnelSans-Italic-VariableFont_wght.ttf') format('ttf');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* 2) Standard Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3) Make Funnel Sans the default and expose a helper that uses the variable axis
+   - We set font-variation-settings to use the --fw custom property (default 400).
+   - We also set font-weight to var(--fw) so non-variable fallbacks and UA metrics work.
+   - Use classes below (fw-300, fw-700) or Tailwind arbitrary properties [--fw:650] to change weight.
+*/
+@layer base {
+  html {
+    font-family: 'Funnel Sans Variable', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  /* base variable font helper: use this class where you want to enable variation-axis usage */
+  .fv {
+    /* This ensures the variable font uses the weight defined in --fw */
+    --fw: 400; /* default weight */
+    font-family: 'Funnel Sans Variable', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-variation-settings: 'wght' var(--fw);
+    font-weight: var(--fw);
+  }
+
+  /* convenience classes for common weights */
+  .fw-100 { --fw: 100; font-weight: 100; }
+  .fw-200 { --fw: 200; font-weight: 200; }
+  .fw-300 { --fw: 300; font-weight: 300; }
+  .fw-400 { --fw: 400; font-weight: 400; }
+  .fw-500 { --fw: 500; font-weight: 500; }
+  .fw-600 { --fw: 600; font-weight: 600; }
+  .fw-700 { --fw: 700; font-weight: 700; }
+  .fw-800 { --fw: 800; font-weight: 800; }
+  .fw-900 { --fw: 900; font-weight: 900; }
+
+  /* italic helper: switches to the italic variable file declared above */
+  .fv-italic { font-style: italic; }
+}
