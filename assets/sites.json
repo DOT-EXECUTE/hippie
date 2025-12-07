@@ -1,0 +1,16 @@
+{
+  "sites": [
+    {
+      "name": "ChatGPT",
+      "url": "openai.com"
+    },
+    {
+      "name": "Claude",
+      "url": "claude.ai"
+    },
+    {
+      "name": "Perplexity",
+      "url": "perplexity.ai"
+    }
+  ]
+}
